@@ -29,22 +29,61 @@ Or run manually:
 tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skill.git "$tmp" && mkdir -p .claude/skills && cp -r "$tmp/pattern5" .claude/skills/ && rm -rf "$tmp"
 ```
 
+### Cursor
+
+Copy the rule file into your project's Cursor rules directory:
+
+```bash
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skill.git "$tmp" && mkdir -p .cursor/rules && cp "$tmp/cursor/pattern5-governance.mdc" .cursor/rules/ && rm -rf "$tmp"
+```
+
+The rule uses Agent Requested mode — Cursor applies it automatically when it detects architectural intent.
+
+### GitHub Copilot
+
+Copy the instructions file into your project's `.github` directory:
+
+```bash
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skill.git "$tmp" && mkdir -p .github && cp "$tmp/copilot/copilot-instructions.md" .github/ && rm -rf "$tmp"
+```
+
+If you already have a `.github/copilot-instructions.md`, append the Pattern5 content to your existing file.
+
 ### Other Agents
 
-See the [Agent Skills Specification](https://agentskills.io/specification) for integration guidance with other MCP-compatible agents.
+See the [Agent Skills Specification](https://agentskills.io/specification) for integration guidance with other MCP-compatible agents. The core governance workflow (search, apply, report gaps) works with any agent connected to the Pattern5 MCP server.
 
 ## How It Works
 
-This skill and the MCP server serve complementary roles:
+This repository and the MCP server serve complementary roles:
 
-- **Skill** (SKILL.md) -- Tells the agent *when* to query and *how* to interpret results. Loaded into the agent's context when triggered.
-- **MCP Server** -- Provides the *tools* and *data*. Handles search, retrieval, submission, and project sync.
+- **Instruction files** (this repo) — Tell the agent *when* to query Pattern5 and *how* to interpret results. Loaded into the agent's context automatically.
+- **MCP Server** — Provides the *tools* and *data*. Handles search, retrieval, submission, and project sync.
 
-The skill triggers when the agent detects architectural intent (creating features, choosing approaches, setting up projects). It does not trigger for syntax questions, debugging, or general knowledge.
+The instructions trigger when the agent detects architectural intent (creating features, choosing approaches, setting up projects). They do not trigger for syntax questions, debugging, or general knowledge.
+
+## Repository Structure
+
+```
+pattern5-skill/
+├── pattern5/           # Claude Code skill
+│   ├── SKILL.md
+│   └── references/
+│       └── query-strategies.md
+├── cursor/             # Cursor rule
+│   └── pattern5-governance.mdc
+├── copilot/            # GitHub Copilot instructions
+│   └── copilot-instructions.md
+├── TESTING.md          # Testing guide
+├── LICENSE
+└── README.md
+```
+
+Each directory contains the same governance guidance adapted to the agent's native instruction format.
 
 ## Versioning
 
-This is version **1.0.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the skill instructs the agent to trust the server over these static instructions.
+This is version **1.0.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
 
 ## License
 
@@ -52,6 +91,6 @@ This is version **1.0.0**. The MCP server is authoritative for tool schemas and 
 
 ## Links
 
-- [Pattern5](https://pattern5.com) -- Platform
-- [GitHub](https://github.com/nhxhnhq/pattern5-skill) -- This repository
-- [Agent Skills Specification](https://agentskills.io/specification) -- Skill format reference
+- [Pattern5](https://pattern5.com) — Platform
+- [GitHub](https://github.com/nhxhnhq/pattern5-skill) — This repository
+- [Agent Skills Specification](https://agentskills.io/specification) — Skill format reference

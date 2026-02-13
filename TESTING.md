@@ -1,16 +1,34 @@
 # Testing the Pattern5 Skill
 
-## Verifying Skill Loading
+## Verifying Installation
 
-To confirm the skill is installed and discoverable, ask the agent:
+### Claude Code
+
+Ask the agent:
 
 > "When would you use the pattern5 skill?"
 
-The agent should respond with a summary matching the skill's description: checking organizational governance before architectural decisions, creating features, choosing approaches, etc. If the agent does not recognize the skill, verify the `pattern5/SKILL.md` file is in the correct directory.
+The agent should respond with a summary matching the skill's description: checking organizational governance before architectural decisions, creating features, choosing approaches, etc. If the agent does not recognize the skill, verify `pattern5/SKILL.md` is in `.claude/skills/pattern5/`.
+
+### Cursor
+
+Open a Cursor chat and ask:
+
+> "What rules do you have about Pattern5?"
+
+Cursor should reference the governance rule. If not, verify `pattern5-governance.mdc` is in `.cursor/rules/`.
+
+### GitHub Copilot
+
+Open Copilot Chat and ask:
+
+> "What instructions do you have about Pattern5?"
+
+Copilot should reference the governance instructions. If not, verify `copilot-instructions.md` is in `.github/`.
 
 ## Should-Trigger Queries
 
-The following prompts should cause the agent to invoke the skill and call Pattern5 MCP tools:
+The following prompts should cause the agent to invoke Pattern5 MCP tools:
 
 1. "Add user authentication to the app"
 2. "Create a new API endpoint for orders"
@@ -25,7 +43,7 @@ The following prompts should cause the agent to invoke the skill and call Patter
 
 ## Should-NOT-Trigger Queries
 
-The following prompts should NOT invoke the skill:
+The following prompts should NOT invoke Pattern5 tools:
 
 1. "What does the `map` function do in JavaScript?"
 2. "Fix the TypeError on line 42"
@@ -38,7 +56,7 @@ The following prompts should NOT invoke the skill:
 
 ## Functional Verification
 
-After confirming trigger behavior, verify end-to-end functionality:
+After confirming trigger behavior, verify end-to-end functionality. These checks apply to all agents.
 
 ### Search-Before-Build
 
@@ -65,24 +83,42 @@ After confirming trigger behavior, verify end-to-end functionality:
 
 To measure the skill's impact:
 
-1. Complete a task (e.g., "Add a new API endpoint") **without** the skill installed.
-2. Complete the same task **with** the skill installed and the MCP server connected.
-3. Compare whether the skill-enabled agent checked for organizational standards and followed existing patterns.
+1. Complete a task (e.g., "Add a new API endpoint") **without** the instruction files installed.
+2. Complete the same task **with** the instruction files installed and the MCP server connected.
+3. Compare whether the agent checked for organizational standards and followed existing patterns.
+
+## Agent-Specific Notes
+
+### Claude Code
+
+- The skill uses **auto-discovery**: Claude Code scans `.claude/skills/` for `SKILL.md` files and loads metadata automatically.
+- The skill triggers based on the `description` field in SKILL.md frontmatter.
+- Reference files in `references/` are loaded on demand, not upfront.
+
+### Cursor
+
+- The rule uses **Agent Requested** mode (`alwaysApply: false`): Cursor reads the `description` field and decides whether to apply the rule based on the current task.
+- To force-apply, mention `@pattern5-governance` in the chat.
+
+### GitHub Copilot
+
+- The instructions file is **always loaded** when Copilot is active in the repository.
+- Copilot does not have conditional triggering — the instructions are always in context.
+- Keep the file concise since it counts toward Copilot's context budget on every interaction.
 
 ## Iteration Guidance
 
 ### Under-Triggering
 
-If the skill does not activate on queries where it should:
+If the agent does not activate on queries where it should:
 
-- Add more trigger phrases to the `description` field in SKILL.md frontmatter.
-- Use phrases that match how users naturally describe the task.
-- Ensure trigger phrases cover all content types (patterns, standards, decisions).
+- **Claude Code**: Add more trigger phrases to the `description` field in SKILL.md frontmatter.
+- **Cursor**: Expand the `description` field in the `.mdc` frontmatter.
+- **Copilot**: Add more explicit "when to query" guidance to the instructions file.
 
 ### Over-Triggering
 
-If the skill activates on queries where it should not:
+If the agent activates on queries where it should not:
 
-- Add more specific negative conditions to the description.
-- Ensure the "should NOT be used" clause explicitly excludes the triggering phrases.
-- Narrow trigger phrases to focus on architectural and implementation intent.
+- **Claude Code / Cursor**: Add more specific negative conditions to the description.
+- **Copilot**: Expand the "When NOT to Query" section with more examples.

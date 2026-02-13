@@ -1,0 +1,44 @@
+# Pattern5: Organizational Governance
+
+Before implementing features, choosing approaches, setting up projects, or making architectural decisions, query the Pattern5 MCP server for organizational standards and patterns.
+
+## Workflow
+
+1. **Search first.** Call `pattern5_search` with the technology and concern (e.g., `"server action error handling"`). Call `pattern5_get` on the best match to retrieve full guidance.
+2. **Apply by type.** Standards are rules — follow them. Patterns are guidance — adapt them. Decisions are prior choices — respect them.
+3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit_pattern`, `pattern5_submit_standard`, or `pattern5_submit_decision`.
+
+## Artifact Types
+
+**Standards** define what MUST, SHOULD, or MAY be done. Read the `rule`, `scope`, `compliant_examples`, and `non_compliant_examples` sections. Check enforcement level: `must` (mandatory), `should` (expected), `may` (optional).
+
+**Patterns** provide reusable solutions. Read `apply_when` to confirm fit, `do_not_apply_when` to rule out false matches, `structure` for implementation shape, `key_constraints` for hard rules, and `anti_patterns` for what to avoid.
+
+**Decisions** record architectural choices. Check `decision_status`: `active` (follow it), `superseded` (find replacement), `deprecated` (proceed with caution). Read `context`, `rationale`, and `consequences`.
+
+## Available Tools
+
+| Tool | Purpose |
+|------|---------|
+| `pattern5_search` | Search artifacts by keyword |
+| `pattern5_list` | Browse artifacts, filter by type |
+| `pattern5_recommend` | Get recommendations by tech stack |
+| `pattern5_get` | Retrieve full artifact details |
+| `pattern5_rate` | Rate an artifact after applying it |
+| `pattern5_sync_project` | Sync project with matching artifacts |
+| `pattern5_submit_pattern` | Create a draft pattern |
+| `pattern5_submit_standard` | Create a draft standard |
+| `pattern5_submit_decision` | Create a draft decision |
+| `pattern5_update` | Modify a draft artifact |
+| `pattern5_publish` | Publish a draft |
+| `pattern5_unpublish` | Revert to draft |
+| `pattern5_delete` | Dismiss an artifact |
+| `pattern5_drafts` | List drafts awaiting review |
+
+## When NOT to Query
+
+Do not search Pattern5 for syntax questions, debugging runtime errors, third-party library docs, or general programming knowledge. The trigger is architectural intent — choosing *how* to build something, not *what* a keyword means.
+
+## Versioning
+
+Version 1.0.0. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.
