@@ -17,16 +17,16 @@ Teach AI coding agents to check organizational standards before writing code.
 
 ### Claude Code
 
-Copy the `pattern5/` folder into your project's skills directory:
+Paste this into Claude Code:
 
-```bash
-cp -r pattern5/ /path/to/your/project/.claude/skills/pattern5
+```
+Install the Pattern5 skill from https://github.com/nhxhnhq/pattern5-skill into this project.
 ```
 
-Or, if using a Claude Code plugin, copy it into the plugin's `skills/` directory:
+Or run manually:
 
 ```bash
-cp -r pattern5/ /path/to/plugin/skills/pattern5
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skill.git "$tmp" && mkdir -p .claude/skills && cp -r "$tmp/pattern5" .claude/skills/ && rm -rf "$tmp"
 ```
 
 ### Other Agents
