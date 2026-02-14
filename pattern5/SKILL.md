@@ -5,21 +5,22 @@ license: MIT
 compatibility: Requires a Pattern5 MCP server connection. The MCP server must be configured in the agent's MCP settings with a valid API key or OAuth token. Without a server connection, this skill's tools will not be available.
 metadata:
   author: NHXHN
-  version: 1.0.0
+  version: 1.1.0
   mcp-server: pattern5
   category: governance
-  tags: [standards, patterns, decisions, architecture, mcp]
+  tags: [standards, patterns, decisions, principles, architecture, mcp]
   docs: https://pattern5.com
   support: support@pattern5.com
 ---
 
 # Pattern5: Organizational Governance for AI Agents
 
-Query the organization's Pattern5 library before making architectural decisions. The library contains three artifact types that serve different purposes:
+Query the organization's Pattern5 library before making architectural decisions. The library contains four artifact types that serve different purposes:
 
 - **Standards** are prescriptive rules. They define what MUST, SHOULD, or MAY be done. Compliance is expected.
 - **Patterns** are reusable solutions. They provide structure, constraints, and anti-patterns for recurring problems. Adoption is recommended.
 - **Decisions** are architectural decision records. They capture why a choice was made, what alternatives were considered, and the consequences. They inform future choices.
+- **Principles** are hierarchical decision-making guidelines. They encode trade-off logic as algorithmic IF/THEN expressions that agents can evaluate. They sit above other artifact types as the most abstract form of governance.
 
 Treat Pattern5 as the organization's source of truth for how code should be written, structured, and evolved. The workflow is: search for existing guidance, apply what is found (differentiating by type), and report gaps when no guidance exists.
 
@@ -45,7 +46,7 @@ After syncing, call `pattern5_list` to see what artifacts are now available. Thi
 
 ### When Exploring What Exists
 
-Call `pattern5_list` to browse all available artifacts. Filter by type (`pattern`, `standard`, or `decision`) to narrow results. This is useful when beginning work in an unfamiliar area of the codebase.
+Call `pattern5_list` to browse all available artifacts. Filter by type (`pattern`, `standard`, `decision`, or `principle`) to narrow results. This is useful when beginning work in an unfamiliar area of the codebase.
 
 Call `pattern5_recommend` with the project's technology stack to get ranked recommendations with relevance scores and match reasons. This is more targeted than listing all artifacts -- it surfaces the most relevant ones based on the technologies in use.
 
@@ -108,6 +109,51 @@ Read the decision's sections to understand the full context:
 
 If proposing a different approach than an active decision, reference the existing decision explicitly and explain what has changed to warrant revisiting it.
 
+### Applying Principles
+
+Principles encode trade-off logic that guides decisions across the organization. They are hierarchical: a parent principle can have sub-principles that refine it, up to three levels deep.
+
+#### Priority and Conflict Resolution
+
+Each principle has an optional priority from 1 (lowest) to 10 (highest). When two principles apply to the same situation:
+
+1. **Higher priority wins.** A priority-8 principle overrides a priority-5 principle on the same topic.
+2. **Specificity breaks ties.** Prefer a sub-principle over its general parent when both match the current context.
+3. **Check conflict notes.** Many principles include a `conflict_notes` section that explicitly addresses overlap with other principles. Read this before applying competing principles.
+
+#### Reading a Principle
+
+Read the principle's sections in this order:
+
+1. **rationale** -- Why this principle exists. Understand the reasoning and trade-offs that motivated it.
+2. **algorithmic_expression** -- The actionable logic. This uses IF/THEN/ELSE/UNLESS keywords to express when and how the principle applies. Evaluate the conditions against the current task.
+3. **examples** -- Concrete illustrations of the principle in action. These show both correct and incorrect applications.
+4. **conflict_notes** (if present) -- Guidance on what to do when this principle conflicts with another.
+
+#### When to Query for Principles
+
+Search for principles when:
+
+- **Competing concerns arise** -- e.g., performance vs. maintainability, speed vs. safety, flexibility vs. consistency.
+- **No standard or pattern exists** -- Principles provide higher-level guidance when specific rules have not been written yet.
+- **Technology trade-offs need resolution** -- e.g., choosing between approaches where both have valid merits.
+- **A decision requires justification** -- Principles supply the reasoning framework that decisions can reference.
+
+#### Example Workflow
+
+1. The agent searches for guidance on infrastructure provisioning and receives a principle titled "Prefer Managed Services Over Self-Hosted."
+2. The principle's `algorithmic_expression` contains:
+   ```
+   IF deploying a new service
+     IF a managed equivalent exists with acceptable cost
+       THEN use the managed service
+       UNLESS regulatory constraints require on-premises hosting
+     ELSE
+       DOCUMENT why self-hosting is necessary
+   ```
+3. The agent evaluates the conditions: a managed equivalent exists, cost is within budget, no regulatory constraints apply.
+4. The agent proceeds with the managed service and cites the principle in the decision rationale.
+
 ### Rating Artifacts
 
 After applying an artifact, call `pattern5_rate` with a rating from 1 to 5 and an optional comment. This feedback improves artifact quality and recommendation accuracy.
@@ -123,6 +169,7 @@ Choose the appropriate submission tool based on what is being documented:
 - **Reusable solution to a recurring problem** -- Call `pattern5_submit_pattern` with a title, description, and `apply_when` conditions. Include `key_constraints`, `anti_patterns`, and `structure` when the implementation shape is clear.
 - **Prescriptive rule or guideline** -- Call `pattern5_submit_standard` with a title, `rule`, and `scope`. Include `compliant_examples` and `non_compliant_examples` with concrete code snippets when possible.
 - **Architectural choice with rationale** -- Call `pattern5_submit_decision` with a title, `decision` (what was chosen), and `context` (what drove the choice). Include `rationale`, `alternatives_considered`, and `consequences` to make the decision record complete.
+- **Trade-off guideline or guiding belief** -- Call `pattern5_submit_principle` with a `title`, `description`, `rationale`, `algorithmic_expression`, and `examples`. The `algorithmic_expression` should use IF/THEN/ELSE/UNLESS keywords with one rule per line. Optionally include `conflict_notes`, `technologies`, `layer`, `parent_id` (to create a sub-principle), `priority` (1-10, where 10 is highest), and `status`.
 
 All submissions are saved as drafts by default. Provide technology tags to improve discoverability. Set the `layer` field (`presentation`, `application`, `data`, or `infrastructure`) when the artifact targets a specific architectural layer.
 
@@ -146,7 +193,7 @@ The trigger is architectural intent: choosing *how* to build something, not *wha
 
 ## Version Compatibility
 
-This skill is version 1.0.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
+This skill is version 1.1.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
 
 ## Additional Resources
 

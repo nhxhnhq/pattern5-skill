@@ -5,11 +5,12 @@ alwaysApply: false
 
 # Pattern5: Organizational Governance
 
-Query the organization's Pattern5 library before making architectural decisions. The library contains three artifact types:
+Query the organization's Pattern5 library before making architectural decisions. The library contains four artifact types:
 
 - **Standards** — Prescriptive rules defining what MUST, SHOULD, or MAY be done. Compliance is expected.
 - **Patterns** — Reusable solutions providing structure, constraints, and anti-patterns. Adoption is recommended.
 - **Decisions** — Architectural decision records capturing why a choice was made. They inform future choices.
+- **Principles** — Hierarchical trade-off guidelines with IF/THEN logic that agents evaluate. Priority 1-10 (10 = highest).
 
 ## Search Before Building
 
@@ -19,7 +20,7 @@ Before writing implementation code for a feature, component, or architectural ch
 
 **Onboarding to a project:** Call `pattern5_sync_project` with technologies detected in the project's dependency files and the project type. This matches and assigns relevant artifacts to the project.
 
-**Exploring what exists:** Call `pattern5_list` to browse available artifacts, filtering by type (`pattern`, `standard`, or `decision`). Call `pattern5_recommend` with the project's technology stack for ranked recommendations.
+**Exploring what exists:** Call `pattern5_list` to browse available artifacts, filtering by type (`pattern`, `standard`, `decision`, or `principle`). Call `pattern5_recommend` with the project's technology stack for ranked recommendations.
 
 ## Apply What Is Found
 
@@ -35,6 +36,10 @@ Read `apply_when` to confirm fit. Check `do_not_apply_when` to rule out false ma
 
 Check `decision_status`: **active** (follow it), **superseded** (find replacement), **deprecated** (proceed with caution). Read `context` and `rationale` to understand why the choice was made. Review `consequences` for trade-offs. To propose a different approach, reference the existing decision and explain what changed.
 
+### Principles
+
+Principles are hierarchical (parent → sub-principles, max 3 levels) with priority 1-10 (10 = highest). Read the `algorithmic_expression` to evaluate IF/THEN/ELSE/UNLESS conditions against the current task. When principles conflict, higher priority wins; when tied, prefer the more specific sub-principle. Check `conflict_notes` for explicit resolution guidance.
+
 ### Rating
 
 After applying an artifact, call `pattern5_rate` with a rating from 1 to 5 and an optional comment.
@@ -46,6 +51,7 @@ When no artifact exists for a decision or approach being taken, create a draft:
 - **Reusable solution** — Call `pattern5_submit_pattern` with title, description, and `apply_when`.
 - **Prescriptive rule** — Call `pattern5_submit_standard` with title, `rule`, and `scope`.
 - **Architectural choice** — Call `pattern5_submit_decision` with title, `decision`, and `context`.
+- **Trade-off guideline** — Call `pattern5_submit_principle` with title, `description`, `rationale`, `algorithmic_expression`, and `examples`.
 
 Manage drafts with `pattern5_drafts` (list), `pattern5_update` (modify), `pattern5_publish` (make available), `pattern5_unpublish` (revert to draft), `pattern5_delete` (dismiss).
 
@@ -55,4 +61,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Version Compatibility
 
-Version 1.0.0. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.
+Version 1.1.0. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.

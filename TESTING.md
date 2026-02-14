@@ -69,11 +69,12 @@ After confirming trigger behavior, verify end-to-end functionality. These checks
 1. Verify the agent treats standards as rules (checks enforcement level, follows compliant examples).
 2. Verify the agent treats patterns as guidance (checks `apply_when`, follows `structure`).
 3. Verify the agent treats decisions as context (checks `decision_status`, reads `rationale`).
+4. Verify the agent treats principles as trade-off guidelines (evaluates `algorithmic_expression`, respects `priority`).
 
 ### Gap Reporting
 
 1. Give the agent a task in an area with no existing artifacts.
-2. Verify the agent calls `pattern5_submit_pattern`, `pattern5_submit_standard`, or `pattern5_submit_decision` to create a draft.
+2. Verify the agent calls `pattern5_submit_pattern`, `pattern5_submit_standard`, `pattern5_submit_decision`, or `pattern5_submit_principle` to create a draft.
 
 ### Rating
 
