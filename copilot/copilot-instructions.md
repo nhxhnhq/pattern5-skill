@@ -5,8 +5,8 @@ Before implementing features, choosing approaches, setting up projects, or makin
 ## Workflow
 
 1. **Search first.** Call `pattern5_search` with the technology and concern (e.g., `"server action error handling"`). Call `pattern5_get` on the best match to retrieve full guidance.
-2. **Apply by type.** Standards are rules — follow them. Patterns are guidance — adapt them. Decisions are prior choices — respect them.
-3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit_pattern`, `pattern5_submit_standard`, or `pattern5_submit_decision`.
+2. **Apply by type.** Standards are rules — follow them. Patterns are guidance — adapt them. Decisions are prior choices — respect them. Principles are trade-off guidelines — evaluate their algorithmic logic.
+3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit_pattern`, `pattern5_submit_standard`, `pattern5_submit_decision`, or `pattern5_submit_principle`.
 
 ## Artifact Types
 
@@ -15,6 +15,8 @@ Before implementing features, choosing approaches, setting up projects, or makin
 **Patterns** provide reusable solutions. Read `apply_when` to confirm fit, `do_not_apply_when` to rule out false matches, `structure` for implementation shape, `key_constraints` for hard rules, and `anti_patterns` for what to avoid.
 
 **Decisions** record architectural choices. Check `decision_status`: `active` (follow it), `superseded` (find replacement), `deprecated` (proceed with caution). Read `context`, `rationale`, and `consequences`.
+
+**Principles** are hierarchical trade-off guidelines (parent → sub-principles, max 3 levels) with priority 1-10 (10 = highest). Read the `algorithmic_expression` to evaluate IF/THEN/ELSE/UNLESS conditions against the current task. When principles conflict, higher priority wins; when tied, prefer the more specific sub-principle. Check `conflict_notes` for resolution guidance.
 
 ## Available Tools
 
@@ -29,6 +31,7 @@ Before implementing features, choosing approaches, setting up projects, or makin
 | `pattern5_submit_pattern` | Create a draft pattern |
 | `pattern5_submit_standard` | Create a draft standard |
 | `pattern5_submit_decision` | Create a draft decision |
+| `pattern5_submit_principle` | Create a draft principle |
 | `pattern5_update` | Modify a draft artifact |
 | `pattern5_publish` | Publish a draft |
 | `pattern5_unpublish` | Revert to draft |
@@ -41,4 +44,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Versioning
 
-Version 1.0.0. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.
+Version 1.1.0. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.

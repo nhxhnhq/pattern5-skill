@@ -9,7 +9,8 @@ Choose the right artifact type based on the situation:
 | Implementing a feature or solving a recurring problem | **Pattern** | Patterns provide reusable solutions with structure, constraints, and anti-patterns |
 | Checking if something is allowed or required | **Standard** | Standards define prescriptive rules with enforcement levels (must/should/may) |
 | Understanding why a past choice was made | **Decision** | Decisions capture rationale, alternatives considered, and consequences |
-| Setting up a new project or onboarding | **All three** | Use `pattern5_list` or `pattern5_sync_project` to discover all relevant artifacts |
+| Resolving architectural trade-offs or competing concerns | **Principle** | Principles encode trade-off logic as IF/THEN expressions with priority-based conflict resolution |
+| Setting up a new project or onboarding | **All four** | Use `pattern5_list` or `pattern5_sync_project` to discover all relevant artifacts |
 | Proposing a new technology or approach | **Decision** | Check existing decisions first to avoid revisiting settled choices |
 
 ## Effective Search Queries
@@ -23,6 +24,8 @@ Specific, intent-driven queries produce the best results:
 - `"React component composition"` - Combines technology and pattern
 - `"API authentication"` - Clear domain and concern
 - `"rate limiting implementation"` - Specific capability
+- `"performance vs maintainability tradeoff"` - Surfaces guiding principles
+- `"infrastructure provisioning guidelines"` - Broad principle-level guidance
 
 ### Poor Queries
 
@@ -65,4 +68,5 @@ Always call `pattern5_get` before applying an artifact. Search results provide t
 - Detailed implementation guidance and code structure
 - Constraints, anti-patterns, and verification checklists
 - Enforcement levels (for standards) and decision status (for decisions)
+- Algorithmic logic (for principles)
 - Technology tags and layer classification

@@ -5,7 +5,7 @@ Teach AI coding agents to check organizational standards before writing code.
 ## What It Does
 
 - Agents **search** the Pattern5 library before making architectural decisions
-- Agents **apply** standards (rules), patterns (solutions), and decisions (rationale) differently based on type
+- Agents **apply** standards (rules), patterns (solutions), decisions (rationale), and principles (trade-off guidelines) differently based on type
 - Agents **report gaps** by creating draft artifacts when no guidance exists
 
 ## Prerequisites
@@ -83,7 +83,7 @@ Each directory contains the same governance guidance adapted to the agent's nati
 
 ## Versioning
 
-This is version **1.0.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
+This is version **1.1.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
 
 ## License
 
