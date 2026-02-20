@@ -10,7 +10,7 @@ Choose the right artifact type based on the situation:
 | Checking if something is allowed or required | **Standard** | Standards define prescriptive rules with enforcement levels (must/should/may) |
 | Understanding why a past choice was made | **Decision** | Decisions capture rationale, alternatives considered, and consequences |
 | Resolving architectural trade-offs or competing concerns | **Principle** | Principles encode trade-off logic as IF/THEN expressions with priority-based conflict resolution |
-| Setting up a new project or onboarding | **All four** | Use `pattern5_list` or `pattern5_sync_project` to discover all relevant artifacts |
+| Setting up a new project or onboarding | **All four** | Use `pattern5_list` to discover all relevant artifacts for the project |
 | Proposing a new technology or approach | **Decision** | Check existing decisions first to avoid revisiting settled choices |
 
 ## Effective Search Queries
@@ -58,8 +58,7 @@ When no artifacts match:
 
 1. Try alternative terms or synonyms (e.g., `"auth"` vs `"authentication"`).
 2. Use `pattern5_list` with a type filter to browse available artifacts in that category.
-3. Use `pattern5_recommend` with the project's technology stack for broader discovery.
-4. If the gap is genuine, create a draft artifact to capture the missing guidance.
+3. If the gap is genuine, create a draft artifact to capture the missing guidance.
 
 ### When to Use pattern5_get
 

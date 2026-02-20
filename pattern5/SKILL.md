@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires a Pattern5 MCP server connection. The MCP server must be configured in the agent's MCP settings with a valid API key or OAuth token. Without a server connection, this skill's tools will not be available.
 metadata:
   author: NHXHN
-  version: 1.1.0
+  version: 1.2.0
   mcp-server: pattern5
   category: governance
   tags: [standards, patterns, decisions, principles, architecture, mcp]
@@ -36,19 +36,15 @@ When `pattern5_search` returns results, scan the titles and descriptions to iden
 
 If search returns multiple artifacts that look relevant, retrieve the top two or three. They often serve complementary roles -- one may be a standard (what must be done) while another is a pattern (how to do it) or a decision (why it was done this way).
 
-If search returns no results, try alternative terms or synonyms before concluding there is no guidance. Then try `pattern5_recommend` with the project's technology stack for broader discovery. A genuine gap should be reported (see Step 3).
+If search returns no results, try alternative terms or synonyms before concluding there is no guidance. Then try `pattern5_list` to browse all available artifacts. A genuine gap should be reported (see Step 3).
 
 ### When Onboarding to a Project
 
-Call `pattern5_sync_project` with the technologies detected in the project's dependency files (package.json, requirements.txt, go.mod, pyproject.toml, Cargo.toml, etc.) and the project type (`web`, `api`, `mobile`, `cli`, `desktop`, or `library`). This automatically finds artifacts matching the tech stack and assigns them to the project.
-
-After syncing, call `pattern5_list` to see what artifacts are now available. This provides a quick overview of the organization's standards and conventions for the project's technology stack.
+Call `pattern5_list` to see what artifacts are available. This provides a quick overview of the organization's standards and conventions for the project's technology stack. Filter by type (`pattern`, `standard`, `decision`, or `principle`) to narrow results.
 
 ### When Exploring What Exists
 
-Call `pattern5_list` to browse all available artifacts. Filter by type (`pattern`, `standard`, `decision`, or `principle`) to narrow results. This is useful when beginning work in an unfamiliar area of the codebase.
-
-Call `pattern5_recommend` with the project's technology stack to get ranked recommendations with relevance scores and match reasons. This is more targeted than listing all artifacts -- it surfaces the most relevant ones based on the technologies in use.
+Call `pattern5_list` to browse all available artifacts. Filter by type to narrow results. This is useful when beginning work in an unfamiliar area of the codebase. Follow up with `pattern5_search` using specific keywords to find artifacts relevant to the current task.
 
 ## Step 2: Apply What Is Found
 
@@ -164,20 +160,20 @@ When no relevant artifact exists for a decision or approach being taken, create 
 
 ### Creating Draft Artifacts
 
-Choose the appropriate submission tool based on what is being documented:
+Call `pattern5_submit` with the appropriate `type` and all required sections:
 
-- **Reusable solution to a recurring problem** -- Call `pattern5_submit_pattern` with a title, description, and `apply_when` conditions. Include `key_constraints`, `anti_patterns`, and `structure` when the implementation shape is clear.
-- **Prescriptive rule or guideline** -- Call `pattern5_submit_standard` with a title, `rule`, and `scope`. Include `compliant_examples` and `non_compliant_examples` with concrete code snippets when possible.
-- **Architectural choice with rationale** -- Call `pattern5_submit_decision` with a title, `decision` (what was chosen), and `context` (what drove the choice). Include `rationale`, `alternatives_considered`, and `consequences` to make the decision record complete.
-- **Trade-off guideline or guiding belief** -- Call `pattern5_submit_principle` with a `title`, `description`, `rationale`, `algorithmic_expression`, and `examples`. The `algorithmic_expression` should use IF/THEN/ELSE/UNLESS keywords with one rule per line. Optionally include `conflict_notes`, `technologies`, `layer`, `parent_id` (to create a sub-principle), `priority` (1-10, where 10 is highest), and `status`.
+- **Reusable solution to a recurring problem** -- `type: "pattern"` with sections: `apply_when`, `do_not_apply_when`, `structure`, `key_constraints`, `anti_patterns`, `verification`. Include a `description` summary and a clear title naming the solution.
+- **Prescriptive rule or guideline** -- `type: "standard"` with sections: `rule`, `scope`, `compliant_examples`, `non_compliant_examples`, `exceptions`. Include concrete code snippets in the example sections. Set `enforcement_level` to `must`, `should`, or `may`.
+- **Architectural choice with rationale** -- `type: "decision"` with sections: `context`, `decision_outcome`, `rationale`, `alternatives_considered`, `consequences`. The `description` should summarize what was chosen.
+- **Trade-off guideline or guiding belief** -- `type: "principle"` with sections: `rationale`, `algorithmic_expression`, `examples`, `conflict_notes`. The `algorithmic_expression` should use IF/THEN/ELSE/UNLESS keywords with one rule per line. Optionally include `parent_id` (to create a sub-principle) and `priority` (1-10, where 10 is highest).
 
-All submissions are saved as drafts by default. Provide technology tags to improve discoverability. Set the `layer` field (`presentation`, `application`, `data`, or `infrastructure`) when the artifact targets a specific architectural layer.
+All sections listed above are required for each type. All submissions are saved as drafts by default. Provide technology tags to improve discoverability. Set the `layer` field (`presentation`, `application`, `data`, or `infrastructure`) when the artifact targets a specific architectural layer.
 
 Write draft content as if another developer -- or another AI agent -- will read it months from now. Clear titles, specific descriptions, and concrete examples make artifacts useful beyond the current session.
 
 ### Managing Drafts
 
-Call `pattern5_drafts` to list artifacts awaiting review. Use `pattern5_update` to modify a draft's title, description, sections, technologies, or layer. Call `pattern5_publish` to make a draft available to all agents in the project. Call `pattern5_unpublish` to revert a published artifact back to draft status. Call `pattern5_delete` to dismiss an artifact that is no longer needed.
+Call `pattern5_list` with `status='draft'` to list artifacts awaiting review. Use `pattern5_update` to modify a draft's title, description, sections, technologies, or layer. Call `pattern5_manage` with `action='publish'` to make a draft available to all agents in the project. Call `pattern5_manage` with `action='unpublish'` to revert a published artifact back to draft status. Call `pattern5_manage` with `action='dismiss'` to soft-delete an artifact that is no longer needed.
 
 ## When NOT to Query Pattern5
 
@@ -193,7 +189,7 @@ The trigger is architectural intent: choosing *how* to build something, not *wha
 
 ## Version Compatibility
 
-This skill is version 1.1.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
+This skill is version 1.2.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
 
 ## Additional Resources
 

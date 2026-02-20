@@ -74,7 +74,7 @@ After confirming trigger behavior, verify end-to-end functionality. These checks
 ### Gap Reporting
 
 1. Give the agent a task in an area with no existing artifacts.
-2. Verify the agent calls `pattern5_submit_pattern`, `pattern5_submit_standard`, `pattern5_submit_decision`, or `pattern5_submit_principle` to create a draft.
+2. Verify the agent calls `pattern5_submit` with the appropriate `type` to create a draft.
 
 ### Rating
 

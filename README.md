@@ -83,7 +83,7 @@ Each directory contains the same governance guidance adapted to the agent's nati
 
 ## Versioning
 
-This is version **1.1.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
+This is version **1.2.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
 
 ## License
 

@@ -18,9 +18,9 @@ Before writing implementation code for a feature, component, or architectural ch
 
 **Starting a task:** Call `pattern5_search` with a query naming the technology and concern (e.g., `"server action error handling"`, `"database migration workflow"`). When results are returned, call `pattern5_get` on the most relevant artifact to retrieve full implementation guidance. Search results only contain titles and summaries.
 
-**Onboarding to a project:** Call `pattern5_sync_project` with technologies detected in the project's dependency files and the project type. This matches and assigns relevant artifacts to the project.
+**Onboarding to a project:** Call `pattern5_list` to see what artifacts are available. Filter by type (`pattern`, `standard`, `decision`, or `principle`) to narrow results.
 
-**Exploring what exists:** Call `pattern5_list` to browse available artifacts, filtering by type (`pattern`, `standard`, `decision`, or `principle`). Call `pattern5_recommend` with the project's technology stack for ranked recommendations.
+**Exploring what exists:** Call `pattern5_list` to browse available artifacts, filtering by type. Follow up with `pattern5_search` using specific keywords to find artifacts relevant to the current task.
 
 ## Apply What Is Found
 
@@ -48,12 +48,12 @@ After applying an artifact, call `pattern5_rate` with a rating from 1 to 5 and a
 
 When no artifact exists for a decision or approach being taken, create a draft:
 
-- **Reusable solution** — Call `pattern5_submit_pattern` with title, description, and `apply_when`.
-- **Prescriptive rule** — Call `pattern5_submit_standard` with title, `rule`, and `scope`.
-- **Architectural choice** — Call `pattern5_submit_decision` with title, `decision`, and `context`.
-- **Trade-off guideline** — Call `pattern5_submit_principle` with title, `description`, `rationale`, `algorithmic_expression`, and `examples`.
+- **Reusable solution** — Call `pattern5_submit` with `type: "pattern"`, title, description, and all required sections (`apply_when`, `do_not_apply_when`, `structure`, `key_constraints`, `anti_patterns`, `verification`).
+- **Prescriptive rule** — Call `pattern5_submit` with `type: "standard"`, title, `rule`, `scope`, and example sections. Set `enforcement_level` to `must`, `should`, or `may`.
+- **Architectural choice** — Call `pattern5_submit` with `type: "decision"`, title, `context`, `decision_outcome`, `rationale`, `alternatives_considered`, and `consequences`.
+- **Trade-off guideline** — Call `pattern5_submit` with `type: "principle"`, title, `rationale`, `algorithmic_expression`, `examples`, and `conflict_notes`.
 
-Manage drafts with `pattern5_drafts` (list), `pattern5_update` (modify), `pattern5_publish` (make available), `pattern5_unpublish` (revert to draft), `pattern5_delete` (dismiss).
+Manage drafts: `pattern5_list` with `status='draft'` (list drafts), `pattern5_update` (modify), `pattern5_manage` with `action='publish'` (make available), `action='unpublish'` (revert to draft), or `action='dismiss'` (soft-delete).
 
 ## When NOT to Query
 
@@ -61,4 +61,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Version Compatibility
 
-Version 1.1.0. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.
+Version 1.2.0. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.

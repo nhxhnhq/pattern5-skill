@@ -6,7 +6,7 @@ Before implementing features, choosing approaches, setting up projects, or makin
 
 1. **Search first.** Call `pattern5_search` with the technology and concern (e.g., `"server action error handling"`). Call `pattern5_get` on the best match to retrieve full guidance.
 2. **Apply by type.** Standards are rules — follow them. Patterns are guidance — adapt them. Decisions are prior choices — respect them. Principles are trade-off guidelines — evaluate their algorithmic logic.
-3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit_pattern`, `pattern5_submit_standard`, `pattern5_submit_decision`, or `pattern5_submit_principle`.
+3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit` specifying the appropriate `type` (`pattern`, `standard`, `decision`, or `principle`) and all required sections.
 
 ## Artifact Types
 
@@ -23,20 +23,12 @@ Before implementing features, choosing approaches, setting up projects, or makin
 | Tool | Purpose |
 |------|---------|
 | `pattern5_search` | Search artifacts by keyword |
-| `pattern5_list` | Browse artifacts, filter by type |
-| `pattern5_recommend` | Get recommendations by tech stack |
+| `pattern5_list` | Browse artifacts, filter by type or status (use `status='draft'` for drafts) |
 | `pattern5_get` | Retrieve full artifact details |
 | `pattern5_rate` | Rate an artifact after applying it |
-| `pattern5_sync_project` | Sync project with matching artifacts |
-| `pattern5_submit_pattern` | Create a draft pattern |
-| `pattern5_submit_standard` | Create a draft standard |
-| `pattern5_submit_decision` | Create a draft decision |
-| `pattern5_submit_principle` | Create a draft principle |
-| `pattern5_update` | Modify a draft artifact |
-| `pattern5_publish` | Publish a draft |
-| `pattern5_unpublish` | Revert to draft |
-| `pattern5_delete` | Dismiss an artifact |
-| `pattern5_drafts` | List drafts awaiting review |
+| `pattern5_submit` | Create a draft artifact (specify `type`: pattern, standard, decision, or principle) |
+| `pattern5_update` | Modify an existing artifact |
+| `pattern5_manage` | Publish, unpublish, or dismiss an artifact (owner only) |
 
 ## When NOT to Query
 
@@ -44,4 +36,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Versioning
 
-Version 1.1.0. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.
+Version 1.2.0. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.
