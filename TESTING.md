@@ -26,6 +26,14 @@ Open Copilot Chat and ask:
 
 Copilot should reference the governance instructions. If not, verify `copilot-instructions.md` is in `.github/`.
 
+### Windsurf
+
+Open a Windsurf chat and ask:
+
+> "What rules do you have about Pattern5?"
+
+Windsurf should reference the governance rule. If not, verify `pattern5-governance.md` is in `.windsurf/rules/`.
+
 ## Should-Trigger Queries
 
 The following prompts should cause the agent to invoke Pattern5 MCP tools:
@@ -106,6 +114,12 @@ To measure the skill's impact:
 - The instructions file is **always loaded** when Copilot is active in the repository.
 - Copilot does not have conditional triggering — the instructions are always in context.
 - Keep the file concise since it counts toward Copilot's context budget on every interaction.
+
+### Windsurf
+
+- The rule uses `trigger: always`: Windsurf includes it in every session automatically.
+- Windsurf reads `.windsurf/rules/*.md` files with YAML frontmatter.
+- Content is always in context, so keep additions concise.
 
 ## Iteration Guidance
 

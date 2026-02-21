@@ -49,6 +49,16 @@ tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skil
 
 If you already have a `.github/copilot-instructions.md`, append the Pattern5 content to your existing file.
 
+### Windsurf
+
+Copy the rules file into your project's Windsurf rules directory:
+
+```bash
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/nhxhnhq/pattern5-skill.git "$tmp" && mkdir -p .windsurf/rules && cp "$tmp/windsurf/pattern5-governance.md" .windsurf/rules/ && rm -rf "$tmp"
+```
+
+The rule uses `trigger: always` — Windsurf includes it in every session automatically.
+
 ### Other Agents
 
 See the [Agent Skills Specification](https://agentskills.io/specification) for integration guidance with other MCP-compatible agents. The core governance workflow (search, apply, report gaps) works with any agent connected to the Pattern5 MCP server.
@@ -74,6 +84,8 @@ pattern5-skill/
 │   └── pattern5-governance.mdc
 ├── copilot/            # GitHub Copilot instructions
 │   └── copilot-instructions.md
+├── windsurf/           # Windsurf rules
+│   └── pattern5-governance.md
 ├── TESTING.md          # Testing guide
 ├── LICENSE
 └── README.md
@@ -83,7 +95,14 @@ Each directory contains the same governance guidance adapted to the agent's nati
 
 ## Versioning
 
-This is version **1.2.0**. The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
+This is version **1.3.0**.
+
+**What's new in 1.3.0:**
+- Windsurf support added (`windsurf/pattern5-governance.md`)
+- Pattern `structure` section now explicitly requires a Mermaid diagram in a ` ```mermaid ` code fence across all instruction files
+- The MCP server enforces Mermaid format on pattern `structure` submissions with an actionable error message
+
+The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
 
 ## License
 

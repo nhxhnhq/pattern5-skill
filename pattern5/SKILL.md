@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires a Pattern5 MCP server connection. The MCP server must be configured in the agent's MCP settings with a valid API key or OAuth token. Without a server connection, this skill's tools will not be available.
 metadata:
   author: NHXHN
-  version: 1.2.0
+  version: 1.3.0
   mcp-server: pattern5
   category: governance
   tags: [standards, patterns, decisions, principles, architecture, mcp]
@@ -162,7 +162,7 @@ When no relevant artifact exists for a decision or approach being taken, create 
 
 Call `pattern5_submit` with the appropriate `type` and all required sections:
 
-- **Reusable solution to a recurring problem** -- `type: "pattern"` with sections: `apply_when`, `do_not_apply_when`, `structure`, `key_constraints`, `anti_patterns`, `verification`. Include a `description` summary and a clear title naming the solution.
+- **Reusable solution to a recurring problem** -- `type: "pattern"` with sections: `apply_when`, `do_not_apply_when`, `structure`, `key_constraints`, `anti_patterns`, `verification`. Include a `description` summary and a clear title naming the solution. The `structure` section must be a Mermaid diagram in a ` ```mermaid ` code fence.
 - **Prescriptive rule or guideline** -- `type: "standard"` with sections: `rule`, `scope`, `compliant_examples`, `non_compliant_examples`, `exceptions`. Include concrete code snippets in the example sections. Set `enforcement_level` to `must`, `should`, or `may`.
 - **Architectural choice with rationale** -- `type: "decision"` with sections: `context`, `decision_outcome`, `rationale`, `alternatives_considered`, `consequences`. The `description` should summarize what was chosen.
 - **Trade-off guideline or guiding belief** -- `type: "principle"` with sections: `rationale`, `algorithmic_expression`, `examples`, `conflict_notes`. The `algorithmic_expression` should use IF/THEN/ELSE/UNLESS keywords with one rule per line. Optionally include `parent_id` (to create a sub-principle) and `priority` (1-10, where 10 is highest).
@@ -189,7 +189,7 @@ The trigger is architectural intent: choosing *how* to build something, not *wha
 
 ## Version Compatibility
 
-This skill is version 1.2.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
+This skill is version 1.3.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
 
 ## Additional Resources
 

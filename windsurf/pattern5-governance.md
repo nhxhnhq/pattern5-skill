@@ -1,6 +1,5 @@
 ---
-description: Apply when creating features, choosing implementation approaches, setting up projects, making technology decisions, adding components or modules, onboarding to a codebase, or discussing architectural trade-offs. Do not apply for syntax questions, debugging runtime errors, general programming knowledge, or tasks unrelated to the connected codebase.
-alwaysApply: false
+trigger: always
 ---
 
 # Pattern5: Organizational Governance
@@ -16,17 +15,15 @@ Query the organization's Pattern5 library before making architectural decisions.
 
 Before writing implementation code for a feature, component, or architectural change, search for existing guidance.
 
-**Starting a task:** Call `pattern5_search` with a query naming the technology and concern (e.g., `"server action error handling"`, `"database migration workflow"`). When results are returned, call `pattern5_get` on the most relevant artifact to retrieve full implementation guidance. Search results only contain titles and summaries.
+**Starting a task:** Call `pattern5_search` with a query naming the technology and concern (e.g., `"server action error handling"`). When results are returned, call `pattern5_get` on the most relevant artifact to retrieve full implementation guidance.
 
-**Onboarding to a project:** Call `pattern5_list` to see what artifacts are available. Filter by type (`pattern`, `standard`, `decision`, or `principle`) to narrow results.
-
-**Exploring what exists:** Call `pattern5_list` to browse available artifacts, filtering by type. Follow up with `pattern5_search` using specific keywords to find artifacts relevant to the current task.
+**Onboarding to a project:** Call `pattern5_list` to see what artifacts are available. Filter by type to narrow results.
 
 ## Apply What Is Found
 
 ### Standards
 
-Standards have enforcement levels: **must** (mandatory), **should** (expected, deviation needs reasoning), **may** (optional). Read the `rule`, `scope`, `compliant_examples`, and `non_compliant_examples` sections. Write code matching compliant examples. Check `exceptions` if present.
+Standards have enforcement levels: **must** (mandatory), **should** (expected, deviation needs reasoning), **may** (optional). Read the `rule`, `scope`, `compliant_examples`, and `non_compliant_examples` sections. Check `exceptions` if present.
 
 ### Patterns
 
@@ -34,11 +31,11 @@ Read `apply_when` to confirm fit. Check `do_not_apply_when` to rule out false ma
 
 ### Decisions
 
-Check `decision_status`: **active** (follow it), **superseded** (find replacement), **deprecated** (proceed with caution). Read `context` and `rationale` to understand why the choice was made. Review `consequences` for trade-offs. To propose a different approach, reference the existing decision and explain what changed.
+Check `decision_status`: **active** (follow it), **superseded** (find replacement), **deprecated** (proceed with caution). Read `context` and `rationale` to understand why the choice was made.
 
 ### Principles
 
-Principles are hierarchical (parent → sub-principles, max 3 levels) with priority 1-10 (10 = highest). Read the `algorithmic_expression` to evaluate IF/THEN/ELSE/UNLESS conditions against the current task. When principles conflict, higher priority wins; when tied, prefer the more specific sub-principle. Check `conflict_notes` for explicit resolution guidance.
+Principles are hierarchical (parent → sub-principles, max 3 levels) with priority 1-10 (10 = highest). Read the `algorithmic_expression` to evaluate IF/THEN/ELSE/UNLESS conditions. When principles conflict, higher priority wins; when tied, prefer the more specific sub-principle.
 
 ### Rating
 
@@ -53,7 +50,7 @@ When no artifact exists for a decision or approach being taken, create a draft:
 - **Architectural choice** — Call `pattern5_submit` with `type: "decision"`, title, `context`, `decision_outcome`, `rationale`, `alternatives_considered`, and `consequences`.
 - **Trade-off guideline** — Call `pattern5_submit` with `type: "principle"`, title, `rationale`, `algorithmic_expression`, `examples`, and `conflict_notes`.
 
-Manage drafts: `pattern5_list` with `status='draft'` (list drafts), `pattern5_update` (modify), `pattern5_manage` with `action='publish'` (make available), `action='unpublish'` (revert to draft), or `action='dismiss'` (soft-delete).
+Manage drafts: `pattern5_list` with `status='draft'` (list), `pattern5_update` (modify), `pattern5_manage` with `action='publish'`, `action='unpublish'`, or `action='dismiss'`.
 
 ## When NOT to Query
 
