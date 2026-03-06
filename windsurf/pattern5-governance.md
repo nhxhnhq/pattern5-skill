@@ -43,14 +43,14 @@ After applying an artifact, call `pattern5_rate` with a rating from 1 to 5 and a
 
 ## Report Gaps
 
-When no artifact exists for a decision or approach being taken, create a draft:
+When no artifact exists for a decision or approach being taken, create an artifact:
 
 - **Reusable solution** — Call `pattern5_submit` with `type: "pattern"`, title, description, and all required sections (`apply_when`, `do_not_apply_when`, `structure`, `key_constraints`, `anti_patterns`, `verification`). The `structure` section must be a Mermaid diagram in a ` ```mermaid ` code fence.
 - **Prescriptive rule** — Call `pattern5_submit` with `type: "standard"`, title, `rule`, `scope`, and example sections. Set `enforcement_level` to `must`, `should`, or `may`.
 - **Architectural choice** — Call `pattern5_submit` with `type: "decision"`, title, `context`, `decision_outcome`, `rationale`, `alternatives_considered`, and `consequences`.
 - **Trade-off guideline** — Call `pattern5_submit` with `type: "principle"`, title, `rationale`, `algorithmic_expression`, `examples`, and `conflict_notes`.
 
-Manage drafts: `pattern5_list` with `status='draft'` (list), `pattern5_update` (modify), `pattern5_manage` with `action='publish'`, `action='unpublish'`, or `action='dismiss'`.
+Manage artifacts: `pattern5_update` (modify), `pattern5_manage` with `action='dismiss'` (soft-delete).
 
 ## When NOT to Query
 
@@ -58,4 +58,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Version Compatibility
 
-Version 1.4.0. The MCP server connects at the workspace level by default. `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection; omit it for workspace-wide results. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.
+Version 1.5.0. The MCP server connects at the workspace level by default. `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection; omit it for workspace-wide results. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.

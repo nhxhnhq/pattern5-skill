@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires a Pattern5 MCP server connection. The MCP server must be configured in the agent's MCP settings with a valid API key or OAuth token. Without a server connection, this skill's tools will not be available.
 metadata:
   author: NHXHN
-  version: 1.4.0
+  version: 1.5.0
   mcp-server: pattern5
   category: governance
   tags: [standards, patterns, decisions, principles, architecture, mcp]
@@ -156,9 +156,9 @@ After applying an artifact, call `pattern5_rate` with a rating from 1 to 5 and a
 
 ## Step 3: Report Gaps
 
-When no relevant artifact exists for a decision or approach being taken, create a draft to capture the knowledge for future reference.
+When no relevant artifact exists for a decision or approach being taken, create an artifact to capture the knowledge for future reference.
 
-### Creating Draft Artifacts
+### Creating Artifacts
 
 Call `pattern5_submit` with the appropriate `type` and all required sections:
 
@@ -167,13 +167,13 @@ Call `pattern5_submit` with the appropriate `type` and all required sections:
 - **Architectural choice with rationale** -- `type: "decision"` with sections: `context`, `decision_outcome`, `rationale`, `alternatives_considered`, `consequences`. The `description` should summarize what was chosen.
 - **Trade-off guideline or guiding belief** -- `type: "principle"` with sections: `rationale`, `algorithmic_expression`, `examples`, `conflict_notes`. The `algorithmic_expression` should use IF/THEN/ELSE/UNLESS keywords with one rule per line. Optionally include `parent_id` (to create a sub-principle) and `priority` (1-10, where 10 is highest).
 
-All sections listed above are required for each type. All submissions are saved as drafts by default. Provide technology tags to improve discoverability. Set the `layer` field (`presentation`, `application`, `data`, or `infrastructure`) when the artifact targets a specific architectural layer.
+All sections listed above are required for each type. Provide technology tags to improve discoverability. Set the `layer` field (`presentation`, `application`, `data`, or `infrastructure`) when the artifact targets a specific architectural layer.
 
-Write draft content as if another developer -- or another AI agent -- will read it months from now. Clear titles, specific descriptions, and concrete examples make artifacts useful beyond the current session.
+Write content as if another developer -- or another AI agent -- will read it months from now. Clear titles, specific descriptions, and concrete examples make artifacts useful beyond the current session.
 
-### Managing Drafts
+### Managing Artifacts
 
-Call `pattern5_list` with `status='draft'` to list artifacts awaiting review. Use `pattern5_update` to modify a draft's title, description, sections, technologies, or layer. Call `pattern5_manage` with `action='publish'` to make a draft available to all agents in the workspace. Call `pattern5_manage` with `action='unpublish'` to revert a published artifact back to draft status. Call `pattern5_manage` with `action='dismiss'` to soft-delete an artifact that is no longer needed.
+Use `pattern5_update` to modify an artifact's title, description, sections, technologies, or layer. Call `pattern5_manage` with `action='dismiss'` to soft-delete an artifact that is no longer needed.
 
 ## When NOT to Query Pattern5
 
@@ -189,7 +189,7 @@ The trigger is architectural intent: choosing *how* to build something, not *wha
 
 ## Version Compatibility
 
-This skill is version 1.4.0. The MCP server connects at the workspace level by default. Use the optional `collection` parameter on `pattern5_search` and `pattern5_list` to scope queries to a specific collection. Omit it for cross-cutting governance that spans the entire workspace. Collection names are case-insensitive; an invalid name returns a helpful error.
+This skill is version 1.5.0. The MCP server connects at the workspace level by default. Use the optional `collection` parameter on `pattern5_search` and `pattern5_list` to scope queries to a specific collection. Omit it for cross-cutting governance that spans the entire workspace. Collection names are case-insensitive; an invalid name returns a helpful error.
 
 The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
 

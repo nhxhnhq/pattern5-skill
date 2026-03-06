@@ -6,7 +6,7 @@ Before implementing features, choosing approaches, setting up projects, or makin
 
 1. **Search first.** Call `pattern5_search` with the technology and concern (e.g., `"server action error handling"`). Call `pattern5_get` on the best match to retrieve full guidance.
 2. **Apply by type.** Standards are rules — follow them. Patterns are guidance — adapt them. Decisions are prior choices — respect them. Principles are trade-off guidelines — evaluate their algorithmic logic.
-3. **Report gaps.** When no artifact exists, create a draft with `pattern5_submit` specifying the appropriate `type` (`pattern`, `standard`, `decision`, or `principle`) and all required sections. For `type: "pattern"`, the `structure` section must be a Mermaid diagram in a ` ```mermaid ` code fence.
+3. **Report gaps.** When no artifact exists, create one with `pattern5_submit` specifying the appropriate `type` (`pattern`, `standard`, `decision`, or `principle`) and all required sections. For `type: "pattern"`, the `structure` section must be a Mermaid diagram in a ` ```mermaid ` code fence.
 
 ## Artifact Types
 
@@ -23,12 +23,12 @@ Before implementing features, choosing approaches, setting up projects, or makin
 | Tool | Purpose |
 |------|---------|
 | `pattern5_search` | Search artifacts by keyword |
-| `pattern5_list` | Browse artifacts, filter by type or status (use `status='draft'` for drafts) |
+| `pattern5_list` | Browse artifacts, filter by type |
 | `pattern5_get` | Retrieve full artifact details |
 | `pattern5_rate` | Rate an artifact after applying it |
-| `pattern5_submit` | Create a draft artifact (specify `type`: pattern, standard, decision, or principle) |
+| `pattern5_submit` | Create a new artifact (specify `type`: pattern, standard, decision, or principle) |
 | `pattern5_update` | Modify an existing artifact |
-| `pattern5_manage` | Publish, unpublish, or dismiss an artifact (owner only) |
+| `pattern5_manage` | Dismiss an artifact (owner only) |
 
 ## When NOT to Query
 
@@ -36,4 +36,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Versioning
 
-Version 1.4.0. The MCP server connects at the workspace level by default. `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection; omit it for workspace-wide results. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.
+Version 1.5.0. The MCP server connects at the workspace level by default. `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection; omit it for workspace-wide results. The MCP server is authoritative for tool schemas. If the server differs from these instructions, trust the server.

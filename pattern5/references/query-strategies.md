@@ -58,7 +58,7 @@ When no artifacts match:
 
 1. Try alternative terms or synonyms (e.g., `"auth"` vs `"authentication"`).
 2. Use `pattern5_list` with a type filter to browse available artifacts in that category.
-3. If the gap is genuine, create a draft artifact to capture the missing guidance.
+3. If the gap is genuine, create an artifact to capture the missing guidance.
 
 ### When to Use pattern5_get
 
