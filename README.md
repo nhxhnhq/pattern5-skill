@@ -6,7 +6,7 @@ Teach AI coding agents to check organizational standards before writing code.
 
 - Agents **search** the Pattern5 library before making architectural decisions
 - Agents **apply** standards (rules), patterns (solutions), decisions (rationale), and principles (trade-off guidelines) differently based on type
-- Agents **report gaps** by creating draft artifacts when no guidance exists
+- Agents **report gaps** by creating artifacts when no guidance exists
 
 ## Prerequisites
 
@@ -95,9 +95,14 @@ Each directory contains the same governance guidance adapted to the agent's nati
 
 ## Versioning
 
-This is version **1.4.0**.
+This is version **1.5.0**.
 
-**What's new in 1.4.0:**
+**What's new in 1.5.0:**
+- Removed draft/queue workflow: artifacts are created directly, no longer saved as drafts by default
+- Simplified artifact management: removed publish/unpublish lifecycle, kept dismiss for soft-deleting artifacts
+- Updated all instruction files across Claude Code, Cursor, Copilot, and Windsurf
+
+**1.4.0:**
 - "Project" renamed to "collection" as the organizational concept
 - Org-first architecture: MCP connects at the workspace level by default; collections are optional runtime filters
 - `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection
