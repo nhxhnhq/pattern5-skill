@@ -84,6 +84,14 @@ After confirming trigger behavior, verify end-to-end functionality. These checks
 1. Give the agent a task in an area with no existing artifacts.
 2. Verify the agent calls `pattern5_submit` with the appropriate `type` to create a draft.
 
+### Collection-Scoped Queries
+
+1. Ask the agent to search within a specific collection (e.g., "Search the React Frontend Standards collection for error handling patterns").
+2. Verify the agent passes the `collection` parameter to `pattern5_search`.
+3. Ask the agent to search for cross-cutting governance (e.g., "Find all security standards across the organization").
+4. Verify the agent omits the `collection` parameter for workspace-wide results.
+5. Pass an invalid collection name and verify the agent handles the error and retries or reports the available collections.
+
 ### Rating
 
 1. After the agent applies an artifact, verify it calls `pattern5_rate`.

@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires a Pattern5 MCP server connection. The MCP server must be configured in the agent's MCP settings with a valid API key or OAuth token. Without a server connection, this skill's tools will not be available.
 metadata:
   author: NHXHN
-  version: 1.3.0
+  version: 1.4.0
   mcp-server: pattern5
   category: governance
   tags: [standards, patterns, decisions, principles, architecture, mcp]
@@ -30,7 +30,7 @@ Before writing implementation code for a feature, component, or architectural ch
 
 ### When Starting a New Task
 
-Call `pattern5_search` with a query that names the technology and concern (e.g., `"server action error handling"`, `"database migration workflow"`). For effective query strategies, consult `references/query-strategies.md`.
+Call `pattern5_search` with a query that names the technology and concern (e.g., `"server action error handling"`, `"database migration workflow"`). For effective query strategies, consult `references/query-strategies.md`. To scope results to a specific collection, pass the optional `collection` parameter (e.g., `pattern5_search({ query: "error handling", collection: "React Frontend Standards" })`). Omit `collection` for workspace-wide results.
 
 When `pattern5_search` returns results, scan the titles and descriptions to identify the most relevant match. Call `pattern5_get` on that artifact to retrieve the full content before writing code. Search results only contain titles and summaries -- the full artifact includes implementation details, code examples, constraints, and verification checklists.
 
@@ -173,7 +173,7 @@ Write draft content as if another developer -- or another AI agent -- will read 
 
 ### Managing Drafts
 
-Call `pattern5_list` with `status='draft'` to list artifacts awaiting review. Use `pattern5_update` to modify a draft's title, description, sections, technologies, or layer. Call `pattern5_manage` with `action='publish'` to make a draft available to all agents in the project. Call `pattern5_manage` with `action='unpublish'` to revert a published artifact back to draft status. Call `pattern5_manage` with `action='dismiss'` to soft-delete an artifact that is no longer needed.
+Call `pattern5_list` with `status='draft'` to list artifacts awaiting review. Use `pattern5_update` to modify a draft's title, description, sections, technologies, or layer. Call `pattern5_manage` with `action='publish'` to make a draft available to all agents in the workspace. Call `pattern5_manage` with `action='unpublish'` to revert a published artifact back to draft status. Call `pattern5_manage` with `action='dismiss'` to soft-delete an artifact that is no longer needed.
 
 ## When NOT to Query Pattern5
 
@@ -189,7 +189,9 @@ The trigger is architectural intent: choosing *how* to build something, not *wha
 
 ## Version Compatibility
 
-This skill is version 1.3.0. The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
+This skill is version 1.4.0. The MCP server connects at the workspace level by default. Use the optional `collection` parameter on `pattern5_search` and `pattern5_list` to scope queries to a specific collection. Omit it for cross-cutting governance that spans the entire workspace. Collection names are case-insensitive; an invalid name returns a helpful error.
+
+The MCP server is the authoritative source for tool schemas, parameter names, and response formats. If the server's tool interface differs from these instructions, trust the server. Tool schemas are self-describing and always reflect the current API.
 
 ## Additional Resources
 

@@ -10,7 +10,7 @@ Teach AI coding agents to check organizational standards before writing code.
 
 ## Prerequisites
 
-- A [Pattern5](https://pattern5.com) account with at least one project
+- A [Pattern5](https://pattern5.com) account
 - The Pattern5 MCP server configured in your agent's MCP settings with a valid API key or OAuth token
 
 ## Installation
@@ -68,9 +68,9 @@ See the [Agent Skills Specification](https://agentskills.io/specification) for i
 This repository and the MCP server serve complementary roles:
 
 - **Instruction files** (this repo) — Tell the agent *when* to query Pattern5 and *how* to interpret results. Loaded into the agent's context automatically.
-- **MCP Server** — Provides the *tools* and *data*. Handles search, retrieval, submission, and project sync.
+- **MCP Server** — Provides the *tools* and *data*. Handles search, retrieval, and submission.
 
-The instructions trigger when the agent detects architectural intent (creating features, choosing approaches, setting up projects). They do not trigger for syntax questions, debugging, or general knowledge.
+The instructions trigger when the agent detects architectural intent (creating features, choosing approaches, setting up new features). They do not trigger for syntax questions, debugging, or general knowledge.
 
 ## Repository Structure
 
@@ -95,12 +95,12 @@ Each directory contains the same governance guidance adapted to the agent's nati
 
 ## Versioning
 
-This is version **1.3.0**.
+This is version **1.4.0**.
 
-**What's new in 1.3.0:**
-- Windsurf support added (`windsurf/pattern5-governance.md`)
-- Pattern `structure` section now explicitly requires a Mermaid diagram in a ` ```mermaid ` code fence across all instruction files
-- The MCP server enforces Mermaid format on pattern `structure` submissions with an actionable error message
+**What's new in 1.4.0:**
+- "Project" renamed to "collection" as the organizational concept
+- Org-first architecture: MCP connects at the workspace level by default; collections are optional runtime filters
+- `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection
 
 The MCP server is authoritative for tool schemas and response formats. If the server's interface evolves, the instruction files tell the agent to trust the server over static content.
 

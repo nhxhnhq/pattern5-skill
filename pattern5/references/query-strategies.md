@@ -10,7 +10,7 @@ Choose the right artifact type based on the situation:
 | Checking if something is allowed or required | **Standard** | Standards define prescriptive rules with enforcement levels (must/should/may) |
 | Understanding why a past choice was made | **Decision** | Decisions capture rationale, alternatives considered, and consequences |
 | Resolving architectural trade-offs or competing concerns | **Principle** | Principles encode trade-off logic as IF/THEN expressions with priority-based conflict resolution |
-| Setting up a new project or onboarding | **All four** | Use `pattern5_list` to discover all relevant artifacts for the project |
+| Setting up a new project or onboarding | **All four** | Use `pattern5_list` to discover all relevant artifacts for your workspace |
 | Proposing a new technology or approach | **Decision** | Check existing decisions first to avoid revisiting settled choices |
 
 ## Effective Search Queries
@@ -69,3 +69,22 @@ Always call `pattern5_get` before applying an artifact. Search results provide t
 - Enforcement levels (for standards) and decision status (for decisions)
 - Algorithmic logic (for principles)
 - Technology tags and layer classification
+
+## Collection-Scoped Queries
+
+Both `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope results to a specific collection.
+
+### When to Use Collection Scoping
+
+- **Domain-specific queries** — Scope to a collection when searching for guidance that belongs to a specific domain (e.g., frontend standards, API platform rules).
+- **Org-wide queries** — Omit `collection` when searching for cross-cutting governance that applies across all collections (e.g., security principles, logging standards).
+
+### Examples
+
+```
+pattern5_search({ query: "error handling", collection: "React Frontend Standards" })
+pattern5_list({ type: "standard", collection: "API Platform" })
+pattern5_search({ query: "authentication" })  // workspace-wide, no collection filter
+```
+
+Collection names are case-insensitive. If you pass an invalid collection name, the server returns a helpful error listing available collections.

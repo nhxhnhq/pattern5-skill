@@ -58,4 +58,4 @@ Do not search Pattern5 for syntax questions, debugging runtime errors, third-par
 
 ## Version Compatibility
 
-Version 1.3.0. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.
+Version 1.4.0. The MCP server connects at the workspace level by default. `pattern5_search` and `pattern5_list` accept an optional `collection` parameter to scope queries to a specific collection; omit it for workspace-wide results. The MCP server is authoritative for tool schemas and response formats. If the server's interface differs from these instructions, trust the server.
